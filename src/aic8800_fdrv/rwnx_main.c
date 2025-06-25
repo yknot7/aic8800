@@ -5791,10 +5791,12 @@ static
 int rwnx_cfg80211_start_radar_detection(struct wiphy *wiphy,
                                         struct net_device *dev,
                                         struct cfg80211_chan_def *chandef
-                                    #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 15, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 15, 0))
                                         , u32 cac_time_ms
-                                    #endif
-                                       ,int id
+#endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0))
+                                        , int dfs_region
+#endif
                                         )
 {
     struct rwnx_hw *rwnx_hw = wiphy_priv(wiphy);
